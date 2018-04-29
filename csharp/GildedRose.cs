@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using csharp.Items;
 
 namespace csharp
 {
@@ -10,13 +11,13 @@ namespace csharp
             _items = items;
         }
 
-
-
         public void UpdateQuality()
         {
             foreach (var item in _items)
             {
-                if (item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Name != "Sulfuras, Hand of Ragnaros"  && item.Quality > 0)
+                if (!(item is AgedBrie) 
+                    && !(item is Sulfuras) 
+                    && !(item is Backstagepasses) && item.Quality > 0)
                 {
                             item.Quality = item.Quality - 1;
                 }
@@ -26,7 +27,7 @@ namespace csharp
                     {
                         item.Quality = item.Quality + 1;
 
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (item is Backstagepasses)
                         {
                             if (item.SellIn < 11 && item.Quality < 50)
                             {
@@ -41,16 +42,16 @@ namespace csharp
                     }
                 }
 
-                if (item.Name != "Sulfuras, Hand of Ragnaros")
+                if (!(item is Sulfuras))
                 {
                     item.SellIn = item.SellIn - 1;
                 }
 
                 if (item.SellIn >= 0) continue;
 
-                if (item.Name != "Aged Brie")
+                if (!(item is AgedBrie))
                 {
-                    if (item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Name != "Sulfuras, Hand of Ragnaros" && item.Quality > 0)
+                    if (!(item is Backstagepasses) && !(item is Sulfuras) && item.Quality > 0)
                     {
                         item.Quality = item.Quality - 1;
                     }

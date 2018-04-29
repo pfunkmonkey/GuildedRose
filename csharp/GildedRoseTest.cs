@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using csharp.Items;
 
 namespace csharp
 {
@@ -51,13 +52,13 @@ namespace csharp
         [Test]
         public void  UpdateQuality_IfItemOnWhiteList_ItemQualityLessThan50_qweqwe()
         {
-            var itemWhiteList= new List<Item>
+            var itemWhiteList = new List<Item>
             {
-                 new Item { Name = "Aged Brie", Quality = 3, SellIn = 5 }
-                ,new Item { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 6, SellIn = 5 }
-                ,new Item { Name = "Sulfuras, Hand of Ragnaros", Quality = 2, SellIn = 5 }
+                new AgedBrie(){ Name = "Aged Brie", Quality = 3, SellIn = 5 }
+                ,new Backstagepasses(){ Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 6, SellIn = 5 }
+                ,new Sulfuras(){ Name = "Sulfuras, Hand of Ragnaros", Quality = 2, SellIn = 5 }
             };
-            var itemBeingProcessed = new List<Item> { new Item { Name = "Aged Brie", Quality = 4, SellIn = 5 } };
+            var itemBeingProcessed = new List<Item> { new AgedBrie() { Name = "Aged Brie", Quality = 4, SellIn = 5 } };
             GildedRose app = new GildedRose(itemBeingProcessed);
             app.UpdateQuality();
             Assert.AreEqual(5, itemBeingProcessed[0].Quality);
@@ -75,13 +76,7 @@ namespace csharp
         [Test]
         public void UpdateQuality_IfItemOnWhiteList_ItemQualitwyLessThan50_qweqwe()
         {
-            var itemWhiteList = new List<Item>
-            {
-                new Item { Name = "Aged Brie", Quality = 3, SellIn = 5 }
-                ,new Item { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 6, SellIn = 5 }
-                ,new Item { Name = "Sulfuras, Hand of Ragnaros", Quality = 2, SellIn = 5 }
-            };
-            var itemBeingProcessed = new List<Item> { new Item { Name = "Aged Brie", Quality = 4, SellIn = 0 } };
+            var itemBeingProcessed = new List<Item> { new AgedBrie() { Name = "Aged Brie", Quality = 4, SellIn = 0 } };
             GildedRose app = new GildedRose(itemBeingProcessed);
             app.UpdateQuality();
             Assert.AreEqual(6, itemBeingProcessed[0].Quality);
@@ -90,13 +85,7 @@ namespace csharp
         [Test]
         public void UpdateQuality_IfItemOnWhiteList_ItemQualitwyLessThan52_qweqwe()
         {
-            var itemWhiteList = new List<Item>
-            {
-                new Item { Name = "Aged Brie", Quality = 3, SellIn = 5 }
-                ,new Item { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 6, SellIn = 10 }
-                ,new Item { Name = "Sulfuras, Hand of Ragnaros", Quality = 2, SellIn = 5 }
-            };
-            var itemBeingProcessed = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 4, SellIn = 0 } };
+            var itemBeingProcessed = new List<Item> { new Backstagepasses() { Name = "Backstage passes to a TAFKAL80ETC concert", Quality = 4, SellIn = 0 } };
             GildedRose app = new GildedRose(itemBeingProcessed);
             app.UpdateQuality();
             Assert.AreEqual(0, itemBeingProcessed[0].Quality);
